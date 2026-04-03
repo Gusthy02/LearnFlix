@@ -1,0 +1,183 @@
+/* body */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: white;
+}
+
+/* header */
+.header {
+  background: linear-gradient(135deg, #232323, #414040);
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
+
+.header nav {
+  margin-top: 10px;
+}
+
+.header a {
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+/* container */
+.container {
+  padding: 10px;
+  animation: fadeIn 0.4s ease;
+}
+
+/* cards */
+.card {
+  background: white;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+
+  animation: fadeIn 0.5s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(2.5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card.urgente {
+  border-left: 5px solid red;
+}
+
+/* botões */
+.buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+button {
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.1);
+  opacity: 0.9;
+}
+
+button:active {
+  transform: scale(0.9);
+}
+
+/* badgets */
+.badge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 8px;
+  margin-top: 5px;
+  font-size: 12px;
+
+  transition: all 0.3s ease;
+}
+
+.badge.concluído {
+  background: #4db351;
+  color: white;
+}
+
+.badge.pendente {
+  background: #555555;
+  color: white;
+}
+
+.badge.dificuldade {
+  background: #ff9800;
+  color: white;
+}
+
+/* barra de pesquisa */
+.search {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid #cccccc;
+
+  transition: all 0.2s ease;
+}
+
+.search:focus {
+  outline: none;
+  border-color: #555555;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* summary */
+.summary {
+  background: linear-gradient(135deg, #232323, #555555);
+  color: white;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+
+  animation: fadeIn 0.6s ease;
+}
+
+/* filtros */
+.filtros {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+/* atualização */
+.feedback {
+  color: green;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.feedback {
+  color: green;
+  font-size: 12px;
+  margin-top: 5px;
+
+  animation: pop 0.3s ease;
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* responsividade */
+@media (min-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 800px;
+    margin: auto;
+  }
+}
