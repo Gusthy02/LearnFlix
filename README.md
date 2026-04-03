@@ -52,7 +52,7 @@ As histórias de usuário seguirão o padrão clássico: *"Como [perfil], eu que
 
 **História de Usuário 1 (Web, Responsividade e Consumo Externo)**
 * **Título:** Visualização de Prazos Acadêmicos.
-* **Descrição:** Como **aluno**, eu quero visualizar um painel responsivo com os meus próximos prazos de entrega, que consuma dados em tempo real da API do calendário oficial da instituição, para que eu possa organizar minha rotina de estudos seja no computador ou no tablet.
+* **Descrição:** Como aluno, eu quero visualizar um painel com os meus próximos prazos de entrega, para que eu possa organizar minha rotina de estudos.
 * **Critérios de Aceite:**
     * O painel deve se adaptar perfeitamente a telas de desktop e tablets (responsividade).
     * Os dados devem ser puxados de uma fonte externa (API).
@@ -60,7 +60,7 @@ As histórias de usuário seguirão o padrão clássico: *"Como [perfil], eu que
 
 **História de Usuário 2 (Mobile e Gestos)**
 * **Título:** Acompanhamento Rápido de Alunos.
-* **Descrição:** Como **professor** utilizando a versão mobile, eu quero poder deslizar (fazer o gesto de *swipe*) os "cards" dos meus alunos para a direita para marcar "atividade concluída", ou para a esquerda para marcar "dificuldade de aprendizagem", para que o registro da avaliação contínua seja ágil e feito durante a própria aula.
+* **Descrição:** Como professor, eu quero registrar rapidamente o status das atividades dos alunos, para que eu possa acompanhar o desempenho durante as aulas.
 * **Critérios de Aceite:**
     * O aplicativo mobile deve reconhecer gestos de *swipe left* e *swipe right*.
     * Ao realizar o gesto, o estado do aluno deve ser atualizado no gerenciador de estados (Redux/Context API) instantaneamente.
