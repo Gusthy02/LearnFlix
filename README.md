@@ -50,21 +50,38 @@ Planejamos incorporar os elementos do Scrum da seguinte maneira para garantir um
 ## 5. Criação de Histórias de Usuário
 As histórias de usuário seguirão o padrão clássico: *"Como [perfil], eu quero [ação], para que [objetivo/benefício]"*, acompanhadas de Critérios de Aceite para garantir a qualidade.
 
-**História de Usuário 1 (Web, Responsividade e Consumo Externo)**
-* **Título:** Visualização de Prazos Acadêmicos.
-* **Descrição:** Como aluno, eu quero visualizar um painel com os meus próximos prazos de entrega, para que eu possa organizar minha rotina de estudos.
-* **Critérios de Aceite:**
-    * O painel deve se adaptar perfeitamente a telas de desktop e tablets (responsividade).
-    * Os dados devem ser puxados de uma fonte externa (API).
-    * Prazos que vencem em menos de 3 dias devem ser destacados em vermelho.
+### História de Usuário 1
+**Título:** Acompanhamento de atividades acadêmicas.
 
-**História de Usuário 2 (Mobile e Gestos)**
-* **Título:** Acompanhamento Rápido de Alunos.
-* **Descrição:** Como professor, eu quero registrar rapidamente o status das atividades dos alunos, para que eu possa acompanhar o desempenho durante as aulas.
-* **Critérios de Aceite:**
-    * O aplicativo mobile deve reconhecer gestos de *swipe left* e *swipe right*.
-    * Ao realizar o gesto, o estado do aluno deve ser atualizado no gerenciador de estados (Redux/Context API) instantaneamente.
-    * Deve haver uma animação visual fluida durante o gesto.
+**Descrição:**  
+Como aluno, quero visualizar minhas atividades e prazos em um painel responsivo, para acompanhar minhas entregas e meu progresso acadêmico.
+
+**Critérios de Aceite:**
+- O painel deve funcionar em dispositivos mobile e desktop.
+- O aluno deve conseguir visualizar atividades pendentes e concluídas.
+- O sistema deve atualizar a interface dinamicamente após alterações.
+
+### História de Usuário 2
+**Título:** Correção de desempenho dos alunos.
+
+**Descrição:**  
+Como professor, quero atualizar notas e desempenho dos alunos em uma interface simples e interativa, para acompanhar o progresso acadêmico da turma.
+
+**Critérios de Aceite:**
+- O professor deve conseguir selecionar notas para os alunos.
+- O desempenho deve ser atualizado automaticamente.
+- O sistema deve exibir feedback visual após alterações.
+
+### História de Usuário 3
+**Título:** Visualização de materiais acadêmicos.
+
+**Descrição:**  
+Como aluno, quero acessar materiais acadêmicos consumidos de uma API externa, para visualizar conteúdos de estudo atualizados dinamicamente.
+
+**Critérios de Aceite:**
+- Os materiais devem ser carregados via API pública utilizando fetch.
+- O sistema deve exibir carregamento enquanto busca os dados.
+- O usuário deve conseguir pesquisar materiais dinamicamente.
 
 ## 6. Planejamento do Projeto de Front-end
 Os passos iniciais e marcos fundamentais para organizar a parte técnica do Front-end são:
@@ -89,4 +106,4 @@ Para garantir uma experiência do usuário (UX) fluida e intuitiva, a plataforma
 A escolha do ecossistema React é ideal para atender aos desafios do **LearnFlix**:
 
 * **ReactJS (Web):** Sua arquitetura baseada em componentes é perfeita para o requisito de criar "componentes reutilizáveis (cards, formulários, modais)". Uma vez criado um "Card de Disciplina", ele poderá ser reutilizado nas telas de alunos, professores e gestores. Além disso, a integração nativa com Redux/Toolkit ou Context API resolve o desafio técnico de gerenciar o estado da aplicação de forma eficiente.
-* **React Native (Mobile):** Permite construir o aplicativo móvel compartilhando grande parte da lógica de negócios e chamadas de API feitas no ReactJS web. Ele fornece acesso a componentes nativos dos smartphones, o que viabiliza perfeitamente o requisito de criar funcionalidades com "gestos do usuário" garantindo a mesma fluidez de um aplicativo nativo.
+* **React Native (Mobile):** Permite construir o aplicativo móvel compartilhando grande parte da lógica de negócios e chamadas de API feitas no ReactJS web. Ele fornece acesso a componentes nativos dos smartphones, o que viabiliza perfeitamente o requisito de criar funcionalidades com "gestos do usuário" (como o *swipe* descrito na história de usuário) com alta performance, garantindo a mesma fluidez de um aplicativo nativo.

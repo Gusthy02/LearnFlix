@@ -1,49 +1,89 @@
-import { useState } from "react";
-import CardPrazo from "../components/CardPrazo";
-import SearchBar from "../components/SearchBar";
-import Summary from "../components/Summary";
+import { useMemo, useState } from "react";
 
-const prazos = [
-  { titulo: "Trabalho React", data: "10/04" },
-  { titulo: "Prova JS", data: "05/04" },
-  { titulo: "Projeto Final", data: "20/04" },
-];
-
-function calcularDias(data) {
-  const hoje = new Date();
-  const partes = data.split("/");
-  const prazo = new Date(2026, partes[1] - 1, partes[0]);
-  return Math.ceil((prazo - hoje) / (1000 * 60 * 60 * 24));
-}
-
-function DashboardAluno() {
+export default function DashboardAluno() {
   const [busca, setBusca] = useState("");
 
-  const filtrados = prazos
-    .filter((item) => item.titulo.toLowerCase().includes(busca.toLowerCase()))
-    .sort((a, b) => calcularDias(a.data) - calcularDias(b.data));
+  const [atividades, setAtividades] = useState([
+    {
+      id: 1,
+      nome: "Matemática",
+      status: "Pendente",
+    },
+    {
+      id: 2,
+      nome: "História",
+      status: "Concluída",
+    },
+    {
+      id: 3,
+      nome: "Biologia",
+      status: "Pendente",
+    },
+  ]);
 
-  const urgentes = filtrados.filter(
-    (item) => calcularDias(item.data) <= 3
+  function concluirAtividade(id) {
+    const novaLista = atividades.map((atividade) => {
+      if (atividade.id === id) {
+        return {
+          ...atividade,
+          status: "Concluída",
+        };
+      }
+
+      return atividade;
+    });
+
+    setAtividades(novaLista);
+  }
+
+  const atividadesFiltradas = useMemo(() => {
+    return atividades.filter((atividade) =>
+      atividade.nome.toLowerCase().includes(busca.toLowerCase())
+    );
+  }, [atividades, busca]);
+
+  const concluidas = atividades.filter(
+    (atividade) => atividade.status === "Concluída"
   ).length;
 
   return (
-    <div className="container">
-      <h2>Prazos Acadêmicos</h2>
+    <section className="pagina">
+      <h2>Dashboard do Aluno</h2>
 
-      <Summary total={filtrados.length} urgentes={urgentes} />
+      <div className="summary">
+        <div className="box">
+          <h3>Total</h3>
+          <p>{atividades.length}</p>
+        </div>
 
-      <SearchBar
+        <div className="box">
+          <h3>Concluídas</h3>
+          <p>{concluidas}</p>
+        </div>
+      </div>
+
+      <input
+        type="text"
+        placeholder="Buscar disciplina"
         value={busca}
-        onChange={setBusca}
-        placeholder="Buscar prazos..."
+        onChange={(e) => setBusca(e.target.value)}
       />
 
-      {filtrados.map((item, index) => (
-        <CardPrazo key={index} {...item} />
-      ))}
-    </div>
+      <div className="cards">
+        {atividadesFiltradas.map((atividade) => (
+          <div className="card" key={atividade.id}>
+            <h3>{atividade.nome}</h3>
+
+            <p>Status: {atividade.status}</p>
+
+            {atividade.status === "Pendente" && (
+              <button onClick={() => concluirAtividade(atividade.id)}>
+                Marcar como concluída
+              </button>
+            )}
+          </div>
+        ))}
+      </div>
+    </section>
   );
 }
-
-export default DashboardAluno;

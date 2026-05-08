@@ -1,19 +1,29 @@
-import "./styles.css";
+import { useState } from "react";
+import Header from "./components/Header";
+import Menu from "./components/Menu";
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import DashboardAluno from "./pages/DashboardAluno";
 import DashboardProfessor from "./pages/DashboardProfessor";
-import Header from "./components/Header";
+import PaginaMateriais from "./pages/PaginaMateriais";
+
+import "./styles.css";
 
 export default function App() {
+  const [pagina, setPagina] = useState("aluno");
+
   return (
-    <BrowserRouter>
+    <div className="app">
       <Header />
 
-      <Routes>
-        <Route path="/" element={<DashboardAluno />} />
-        <Route path="/professor" element={<DashboardProfessor />} />
-      </Routes>
-    </BrowserRouter>
+      <Menu setPagina={setPagina} />
+
+      <main>
+        {pagina === "aluno" && <DashboardAluno />}
+
+        {pagina === "professor" && <DashboardProfessor />}
+
+        {pagina === "materiais" && <PaginaMateriais />}
+      </main>
+    </div>
   );
 }

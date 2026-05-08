@@ -1,58 +1,184 @@
+/* reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 /* body */
 body {
-  margin: 0;
   font-family: Arial, sans-serif;
   background: white;
+  color: #232323;
+}
+
+/* app */
+.app {
+  min-height: 100vh;
 }
 
 /* header */
 .header {
   background: linear-gradient(135deg, #232323, #414040);
   color: white;
-  padding: 15px;
+  padding: 20px;
   text-align: center;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-.header nav {
-  margin-top: 10px;
+.header h1 {
+  margin-bottom: 5px;
 }
 
-.header a {
+.header p {
+  opacity: 0.9;
+}
+
+/* menu moderno */
+
+.menu-container {
+  padding: 15px;
+}
+
+.menu-toggle {
+  width: 100%;
+
+  background: #232323;
+
   color: white;
-  margin: 0 10px;
-  text-decoration: none;
+
+  padding: 12px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  font-size: 16px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+}
+
+.menu-toggle:hover {
+  background: #414040;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+
+  margin-top: 12px;
+
+  max-height: 0;
+
+  overflow: hidden;
+
+  opacity: 0;
+
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.menu.aberto {
+  max-height: 300px;
+  opacity: 1;
+}
+
+.menu button {
+  background: white;
+
+  color: #232323;
+
+  border: 1px solid #dddddd;
+
+  padding: 12px;
+
+  border-radius: 10px;
+
+  text-align: left;
+
+  font-size: 15px;
+
+  font-weight: bold;
+
+  transition: all 0.2s ease;
+}
+
+.menu button:hover {
+  background: #232323;
+  color: white;
 }
 
 /* container */
-.container {
+.container,
+.pagina {
   padding: 10px;
+
   animation: fadeIn 0.4s ease;
 }
 
 /* cards */
-.card {
+.cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.card,
+.card-material {
   background: white;
-  padding: 12px;
-  border-radius: 10px;
+
+  padding: 15px;
+
+  border-radius: 12px;
+
   margin-bottom: 10px;
 
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+
   animation: fadeIn 0.5s ease;
+
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.card:hover,
+.card-material:hover {
+  transform: translateY(-3px);
+
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+}
+
+.card h3,
+.card-material h3 {
+  margin-bottom: 10px;
+}
+
+.card p,
+.card-material p {
+  color: #555555;
+  line-height: 1.5;
+}
+
+.card.urgente {
+  border-left: 5px solid red;
+}
+
+/* animações */
 @keyframes fadeIn {
   from {
     opacity: 0;
     transform: translateY(2.5px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-.card.urgente {
-  border-left: 5px solid red;
 }
 
 /* botões */
@@ -63,35 +189,49 @@ body {
 }
 
 button {
-  padding: 8px;
+  padding: 10px;
+
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
+
   cursor: pointer;
 
   transition: all 0.2s ease;
 }
 
 button:hover {
-  transform: scale(1.1);
-  opacity: 0.9;
+  transform: scale(1.05);
+  opacity: 0.92;
 }
 
 button:active {
-  transform: scale(0.9);
+  transform: scale(0.95);
 }
 
-/* badgets */
-.badge {
+.card button {
+  background: #232323;
+  color: white;
+  margin-top: 12px;
+}
+
+/* badges */
+.badge,
+.status {
   display: inline-block;
-  padding: 5px 10px;
+
+  padding: 6px 12px;
+
   border-radius: 8px;
-  margin-top: 5px;
+
+  margin-top: 8px;
+
   font-size: 12px;
 
   transition: all 0.3s ease;
 }
 
-.badge.concluído {
+.badge.concluído,
+.status.ativo {
   background: #4db351;
   color: white;
 }
@@ -101,37 +241,65 @@ button:active {
   color: white;
 }
 
-.badge.dificuldade {
+.badge.dificuldade,
+.status.atencao {
   background: #ff9800;
   color: white;
 }
 
 /* barra de pesquisa */
-.search {
+.search,
+input {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 12px;
-  border-radius: 8px;
+
+  padding: 12px;
+
+  margin-bottom: 15px;
+
+  border-radius: 10px;
+
   border: 1px solid #cccccc;
 
   transition: all 0.2s ease;
 }
 
-.search:focus {
+.search:focus,
+input:focus {
   outline: none;
+
   border-color: #555555;
+
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
 /* summary */
 .summary {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+
+  margin-bottom: 15px;
+}
+
+.box {
   background: linear-gradient(135deg, #232323, #555555);
+
   color: white;
-  padding: 12px;
-  border-radius: 10px;
-  margin-bottom: 10px;
+
+  padding: 15px;
+
+  border-radius: 12px;
 
   animation: fadeIn 0.6s ease;
+}
+
+.box h3 {
+  margin-bottom: 8px;
+}
+
+.box p {
+  font-size: 24px;
+  font-weight: bold;
 }
 
 /* filtros */
@@ -142,13 +310,7 @@ button:active {
   flex-wrap: wrap;
 }
 
-/* atualização */
-.feedback {
-  color: green;
-  font-size: 12px;
-  margin-top: 5px;
-}
-
+/* feedback */
 .feedback {
   color: green;
   font-size: 12px;
@@ -162,22 +324,116 @@ button:active {
     transform: scale(0.8);
     opacity: 0;
   }
+
   to {
     transform: scale(1);
     opacity: 1;
   }
 }
 
+/* loading */
+.loading {
+  text-align: center;
+  color: #555555;
+  margin-top: 20px;
+}
+
+/* materiais */
+.card-material h3 {
+  color: #232323;
+  margin-bottom: 10px;
+}
+
+.card-material p {
+  margin-top: 8px;
+  color: #555555;
+  line-height: 1.5;
+}
+
+/* notas */
+.nota-area {
+  margin-top: 15px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nota-area label {
+  font-size: 14px;
+  color: #555555;
+}
+
+.nota-area select {
+  padding: 10px;
+
+  border-radius: 8px;
+
+  border: 1px solid #cccccc;
+
+  background: white;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.nota-area select:focus {
+  outline: none;
+
+  border-color: #555555;
+
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
 /* responsividade */
 @media (min-width: 768px) {
-  .container {
+  .menu-toggle {
+    display: none;
+  }
+
+  .menu {
+    max-height: none;
+
+    opacity: 1;
+
+    overflow: visible;
+
+    flex-direction: row;
+
+    justify-content: center;
+  }
+
+  .menu button {
+    text-align: center;
+  }
+
+  .container,
+  .pagina {
     padding: 20px;
+  }
+
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .summary {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (min-width: 1024px) {
-  .container {
-    max-width: 800px;
+  .container,
+  .pagina {
+    max-width: 1200px;
     margin: auto;
+  }
+
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .summary {
+    grid-template-columns: repeat(4, 1fr);
   }
 }

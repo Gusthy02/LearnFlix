@@ -1,16 +1,9 @@
-import { Link } from "react-router-dom";
-
-function Header() {
+export default function Header() {
   return (
     <header className="header">
       <h1>LearnFlix</h1>
 
-      <nav>
-        <Link to="/">Aluno</Link>
-        <Link to="/professor">Professor</Link>
-      </nav>
+      <p>Plataforma educacional interativa</p>
     </header>
   );
 }
-
-export default Header;

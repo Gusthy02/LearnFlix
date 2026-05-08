@@ -1,58 +1,124 @@
-import { useState } from "react";
-import CardAluno from "../components/CardAluno";
-import SearchBar from "../components/SearchBar";
+import { useMemo, useState } from "react";
 
-function DashboardProfessor() {
+export default function DashboardProfessor() {
   const [busca, setBusca] = useState("");
-  const [filtro, setFiltro] = useState("Todos");
+
+  const [feedback, setFeedback] = useState("");
 
   const [alunos, setAlunos] = useState([
-    { nome: "Josinwellington", status: "Pendente" },
-    { nome: "Michael Jackson", status: "Concluído" },
-    { nome: "Ariane", status: "Dificuldade" },
+    {
+      id: 1,
+      nome: "Ana",
+      nota: 8,
+      desempenho: "Bom",
+    },
+    {
+      id: 2,
+      nome: "Carlos",
+      nota: 5,
+      desempenho: "Atenção",
+    },
+    {
+      id: 3,
+      nome: "Julia",
+      nota: 9,
+      desempenho: "Excelente",
+    },
   ]);
 
-  const atualizarStatus = (index, novoStatus) => {
-    const novos = [...alunos];
-    novos[index].status = novoStatus;
-    setAlunos(novos);
-  };
+  function atualizarNota(id, novaNota) {
+    const novaLista = alunos.map((aluno) => {
+      if (aluno.id === id) {
+        let desempenho = "Bom";
 
-  const filtrados = alunos.filter((aluno) => {
-    const matchNome = aluno.nome.toLowerCase().includes(busca.toLowerCase());
+        if (novaNota >= 9) {
+          desempenho = "Excelente";
+        } else if (novaNota < 6) {
+          desempenho = "Atenção";
+        }
 
-    const matchStatus = filtro === "Todos" || aluno.status === filtro;
+        return {
+          ...aluno,
+          nota: Number(novaNota),
+          desempenho,
+        };
+      }
 
-    return matchNome && matchStatus;
-  });
+      return aluno;
+    });
+
+    setAlunos(novaLista);
+
+    setFeedback("Nota atualizada com sucesso!");
+
+    setTimeout(() => {
+      setFeedback("");
+    }, 2000);
+  }
+
+  const alunosFiltrados = useMemo(() => {
+    return alunos.filter((aluno) =>
+      aluno.nome.toLowerCase().includes(busca.toLowerCase())
+    );
+  }, [alunos, busca]);
 
   return (
-    <div className="container">
-      <h2>Acompanhamento de Alunos</h2>
+    <section className="pagina">
+      <h2>Dashboard do Professor</h2>
 
-      <SearchBar
+      <input
+        type="text"
+        placeholder="Buscar aluno"
         value={busca}
-        onChange={setBusca}
-        placeholder="Buscar aluno..."
+        onChange={(e) => setBusca(e.target.value)}
       />
 
-      <div className="filtros">
-        <button onClick={() => setFiltro("Todos")}>Todos</button>
-        <button onClick={() => setFiltro("Pendente")}>Pendentes</button>
-        <button onClick={() => setFiltro("Concluído")}>Concluídos</button>
-        <button onClick={() => setFiltro("Dificuldade")}>Dificuldade</button>
-      </div>
+      {feedback && <p className="feedback">{feedback}</p>}
 
-      {filtrados.map((aluno, index) => (
-        <CardAluno
-          key={index}
-          nome={aluno.nome}
-          status={aluno.status}
-          onAtualizar={(status) => atualizarStatus(index, status)}
-        />
-      ))}
-    </div>
+      <div className="cards">
+        {alunosFiltrados.map((aluno) => (
+          <div className="card" key={aluno.id}>
+            <h3>{aluno.nome}</h3>
+
+            <p>
+              Nota atual: <strong>{aluno.nota}</strong>
+            </p>
+
+            <span
+              className={`badge ${
+                aluno.desempenho === "Excelente"
+                  ? "concluído"
+                  : aluno.desempenho === "Atenção"
+                  ? "dificuldade"
+                  : "pendente"
+              }`}
+            >
+              {aluno.desempenho}
+            </span>
+
+            <div className="nota-area">
+              <label>Lançar nota:</label>
+
+              <select
+                value={aluno.nota}
+                onChange={(e) => atualizarNota(aluno.id, e.target.value)}
+              >
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 }
-
-export default DashboardProfessor;
